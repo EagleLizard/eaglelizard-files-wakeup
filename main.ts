@@ -5,6 +5,7 @@ import request, { Response } from 'request';
 // const INTERVAL:number = 6e4; // 1 minute
 const PREVIEW_WIDTH = 300;
 const INTERVAL:number = 9e5; // 15 minutes
+const WAKEUP_TIME = 7;
 
 main();
 
@@ -18,12 +19,13 @@ function run(firstRun: boolean){
   date = getMtnDate();
   hours = date.getHours();
   console.log(`firstRun: ${firstRun}`);
-  if(hours >= 6){
-    wake(firstRun || hours === 6);
+  if(hours >= WAKEUP_TIME){
+    wake(firstRun || hours === WAKEUP_TIME);
     if(firstRun){
       firstRun = false;
     }
   }else{
+    console.log('Sleeping...');
     if(!firstRun) firstRun = true;
   }
   setTimeout(()=>{
