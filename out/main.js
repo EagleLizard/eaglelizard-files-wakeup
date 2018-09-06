@@ -8,7 +8,7 @@ const request_1 = __importDefault(require("request"));
 // const INTERVAL:number = 6e4; // 1 minute
 const PREVIEW_WIDTH = 300;
 const INTERVAL = 9e5; // 15 minutes
-const WAKEUP_TIME = 6;
+const WAKEUP_TIME = 7;
 main();
 function main() {
     run(true);
@@ -26,6 +26,7 @@ function run(firstRun) {
         }
     }
     else {
+        console.log('Sleeping...');
         if (!firstRun)
             firstRun = true;
     }
