@@ -39,10 +39,12 @@ function wake(firstCache = true) {
     uris = firstCache
         ? getAllImageUris()
         : [getRandomImageUri()];
+    // add the main website html also
     promises = uris.map(uri => getImage(uri));
     if (firstCache) {
         // cache previews
         promises = [
+            getWebsite(),
             ...promises,
             ...uris.map(uri => getImage(uri, PREVIEW_WIDTH))
         ];
@@ -59,6 +61,20 @@ function getRandomImageUri() {
     uris = getAllImageUris();
     randIdx = Math.floor(Math.random() * uris.length);
     return uris[randIdx];
+}
+function getWebsite() {
+    return new Promise((resolve, reject) => {
+        let uri;
+        uri = 'http://www.janicechan.design';
+        request_1.default(uri, (err, resp) => {
+            if (err)
+                return reject(err);
+            resolve({
+                uri,
+                statusCode: resp.statusCode
+            });
+        });
+    });
 }
 function getImage(uri, width) {
     return new Promise((resolve, reject) => {

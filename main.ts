@@ -1,6 +1,7 @@
 
 import imageUris from './image-uris';
 import request, { Response } from 'request';
+import { resolve } from 'url';
 
 // const INTERVAL:number = 6e4; // 1 minute
 const PREVIEW_WIDTH = 300;
@@ -38,12 +39,13 @@ function wake(firstCache:boolean = true){
   uris = firstCache 
     ? getAllImageUris()
     : [getRandomImageUri()];
-
+  // add the main website html also
   promises = uris.map(uri=>getImage(uri));
-
+  
   if(firstCache){
     // cache previews
     promises = [
+      getWebsite(),
       ...promises,
       ...uris.map(uri=>getImage(uri, PREVIEW_WIDTH))
     ];
@@ -65,6 +67,20 @@ function getRandomImageUri(): string{
   uris = getAllImageUris();
   randIdx = Math.floor( Math.random()*uris.length );
   return uris[randIdx];
+}
+
+function getWebsite(){
+  return new Promise((resolve, reject)=>{
+    let uri: string;
+    uri = 'http://www.janicechan.design';
+    request(uri, (err: any, resp: Response)=>{
+      if(err) return reject(err);
+      resolve({
+        uri,
+        statusCode: resp.statusCode
+      });
+    });
+  });
 }
 
 function getImage(uri:string, width?: number){
