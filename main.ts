@@ -39,17 +39,19 @@ function wake(firstCache:boolean = true){
   uris = firstCache 
     ? getAllImageUris()
     : [getRandomImageUri()];
-  // add the main website html also
-  promises = uris.map(uri=>getImage(uri));
-  
-  if(firstCache){
-    // cache previews
-    promises = [
-      getWebsite(),
-      ...promises,
-      ...uris.map(uri=>getImage(uri, PREVIEW_WIDTH))
-    ];
-  }
+    promises = uris.map(uri=>getImage(uri));
+    
+    if(firstCache){
+      // cache previews
+      promises = [
+        ...promises,
+        ...uris.map(uri=>getImage(uri, PREVIEW_WIDTH))
+      ];
+    }
+    
+    // add the main website html
+  promises.push(getWebsite());
+
   Promise.all(promises)
     .then(resArr=>{
       console.log(
