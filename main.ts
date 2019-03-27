@@ -5,7 +5,9 @@ import { resolve } from 'url';
 
 // const INTERVAL:number = 6e4; // 1 minute
 const PREVIEW_WIDTH = 300;
-const INTERVAL:number = 9e5; // 15 minutes
+const PREVIEW_WIDTH_2 = 350;
+const INTERVAL:number = 3600000; // 1 minutes
+// const INTERVAL:number = 4.32e7; // 12 hours
 const WAKEUP_TIME = 7;
 
 main();
@@ -20,7 +22,7 @@ function run(firstRun: boolean){
   date = getMtnDate();
   hours = date.getHours();
   console.log(`firstRun: ${firstRun}`);
-  if(hours >= WAKEUP_TIME){
+  if(true || hours >= WAKEUP_TIME){
     wake(firstRun || hours === WAKEUP_TIME);
     if(firstRun){
       firstRun = false;
@@ -36,16 +38,19 @@ function run(firstRun: boolean){
 
 function wake(firstCache:boolean = true){
   let uris: string[], promises: Promise<any>[];
-  uris = firstCache 
-    ? getAllImageUris()
-    : [getRandomImageUri()];
+  // uris = getAllImageUris();
+  uris = [];
+  // uris = firstCache 
+  //   ? getAllImageUris()
+  //   : [getRandomImageUri()];
     promises = uris.map(uri=>getImage(uri));
     
     if(firstCache){
       // cache previews
       promises = [
         ...promises,
-        ...uris.map(uri=>getImage(uri, PREVIEW_WIDTH))
+        ...uris.map(uri=>getImage(uri, PREVIEW_WIDTH)),
+        ...uris.map(uri=>getImage(uri, PREVIEW_WIDTH_2)),
       ];
     }
     
