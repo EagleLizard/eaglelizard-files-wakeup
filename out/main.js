@@ -8,7 +8,7 @@ const request_1 = __importDefault(require("request"));
 // const INTERVAL:number = 6e4; // 1 minute
 const PREVIEW_WIDTH = 300;
 const PREVIEW_WIDTH_2 = 350;
-const INTERVAL = 3600000; // 1 minutes
+const INTERVAL = 9e5; // 15 minutes
 // const INTERVAL:number = 4.32e7; // 12 hours
 const WAKEUP_TIME = 7;
 main();
@@ -21,6 +21,7 @@ function run(firstRun) {
     date = getMtnDate();
     hours = date.getHours();
     console.log(`firstRun: ${firstRun}`);
+    console.log(new Date().toISOString());
     if (true || hours >= WAKEUP_TIME) {
         wake(firstRun || hours === WAKEUP_TIME);
         if (firstRun) {
