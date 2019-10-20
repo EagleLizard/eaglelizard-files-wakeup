@@ -1,29 +1,27 @@
-
-import imageUris from './image-uris';
-import request, { Response } from 'request';
-import { resolve } from 'url';
+const imageUris = require('./image-uris');
+const request = require('request');
 
 // const INTERVAL:number = 6e4; // 1 minute
-const PREVIEW_WIDTH = 300;
-const PREVIEW_WIDTH_2 = 350;
-const INTERVAL:number = 9e5; // 15 minutes
+const PREVIEW_WIDTH = 350;
+const INTERVAL = 15 * 60 * 1000; // 15 minutes
 // const INTERVAL:number = 4.32e7; // 12 hours
 const WAKEUP_TIME = 7;
 
 main();
 
-function main(): void{
+function main(){
   run(true);
   //start the loop
 }
 
-function run(firstRun: boolean){
+
+function run(firstRun){
   let date, hours;
   date = getMtnDate();
   hours = date.getHours();
   console.log(`firstRun: ${firstRun}`);
   console.log(new Date().toISOString());
-  if(true || hours >= WAKEUP_TIME){
+  if(firstRun === true || hours >= WAKEUP_TIME){
     wake(firstRun || hours === WAKEUP_TIME);
     if(firstRun){
       firstRun = false;
@@ -37,26 +35,27 @@ function run(firstRun: boolean){
   }, INTERVAL);
 }
 
-function wake(firstCache:boolean = true){
-  let uris: string[], promises: Promise<any>[];
+function wake(firstCache){
+  let uris, promises, randomUri, allUris;
+  console.log(`First cache: ${firstCache}`);
   // uris = getAllImageUris();
   uris = [];
-  // uris = firstCache 
-  //   ? getAllImageUris()
-  //   : [getRandomImageUri()];
-    promises = uris.map(uri=>getImage(uri));
+  promises = uris.map(uri=>getImage(uri));
     
-    if(firstCache){
-      // cache previews
-      promises = [
-        ...promises,
-        ...uris.map(uri=>getImage(uri, PREVIEW_WIDTH)),
-        ...uris.map(uri=>getImage(uri, PREVIEW_WIDTH_2)),
-      ];
-    }
-    
-    // add the main website html
+  // add the main website html
   promises.push(getWebsite());
+  // get a random image
+  randomUri = getRandomImageUri();
+  console.log(`Selected URI: ${randomUri}`);
+  promises.push(getImage(randomUri));
+
+  if(firstCache){
+    // cache previews
+    allUris = getAllImageUris();
+    allUris.forEach(imgUri => {
+      promises.push(getImage(imgUri, PREVIEW_WIDTH));
+    });
+  }
 
   Promise.all(promises)
     .then(resArr=>{
@@ -70,7 +69,7 @@ function wake(firstCache:boolean = true){
     });
 }
 
-function getRandomImageUri(): string{
+function getRandomImageUri(){
   let uris, randIdx;
   uris = getAllImageUris();
   randIdx = Math.floor( Math.random()*uris.length );
@@ -79,9 +78,9 @@ function getRandomImageUri(): string{
 
 function getWebsite(){
   return new Promise((resolve, reject)=>{
-    let uri: string;
+    let uri;
     uri = 'http://www.janicechan.design';
-    request(uri, (err: any, resp: Response)=>{
+    request(uri, (err, resp)=>{
       if(err) return reject(err);
       resolve({
         uri,
@@ -91,9 +90,9 @@ function getWebsite(){
   });
 }
 
-function getImage(uri:string, width?: number){
+function getImage(uri, width){
   return new Promise((resolve, reject)=>{
-    let options: any, qs: any;
+    let options, qs;
     qs = {};
     if(width){
       qs.width = width;
@@ -104,7 +103,7 @@ function getImage(uri:string, width?: number){
       uri,
       qs,
     };
-    request(options, (err:any, resp:Response, body:any)=>{
+    request(options, (err, resp, body)=>{
       if(err) return reject(err);
       resolve({
         uri,
@@ -115,13 +114,11 @@ function getImage(uri:string, width?: number){
 }
 
 function getAllImageUris(){
-  let allUris: string[];
+  let allUris;
   allUris = [];
   Object.keys(imageUris).forEach(key=>{
     if(Array.isArray(imageUris[key])){
-      imageUris[key].forEach((uri:string)=>{
-        allUris.push(uri);
-      });
+      allUris.push(...imageUris[key]);
     }else{
       allUris.push(imageUris[key]);
     }
@@ -130,7 +127,7 @@ function getAllImageUris(){
 }
 
 function getMtnDate(){
-  let date: Date, mtnDate: Date, utc: number;
+  let date, mtnDate, utc;
   date = new Date();
   // utc = date.getTime() + (date.getTimezoneOffset() * 6e4);
   // mtnDate = new Date(utc + (36e5*(-6)));

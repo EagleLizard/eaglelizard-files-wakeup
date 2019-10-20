@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const BASEPATH = 'https://eaglelizard-files.herokuapp.com/';
 const LOGO = imageUri('WebsiteLogo-min.png');
 const HOME = imageUri('projects-home.png');
-const JANU = imageUri('janu.jpg');
+const JANU = imageUri('bio-janice.jpg');
 const PLACEHOLDER = imageUri('bigbird.jpg');
 const RENAISSANCE_FAIRE = imageUri('utahrenaissancefaire.png');
 const BYU = imageUri('brighamyounguniversity.jpg');
@@ -16,7 +14,95 @@ const AGAMEMNON = imageUri('agamemnon.jpg');
 const NEXT_FALL = imageUri('nextfall.jpg');
 const CABARET = imageUri('cabaret.jpg');
 const THE_DRAG = imageUri('thedrag.jpg');
-const THE_DRAG_GRALLERY = imageUris([
+const LARAMIE = imageUri('laramie.jpg');
+const MRBURNS = imageUri('mrburns.jpg');
+const TAMINGOFTHESHREW = imageUri('tamingoftheshrew.jpg');
+const URINETOWN = imageUri('urinetown.jpg');
+const ART_GALLERY = imageUris([
+    'art/art1.png',
+    'art/art2.png',
+    'art/art3.png',
+    'art/art4.png',
+    'art/art5.jpg',
+    'art/art6.jpg',
+    'art/art7.jpg',
+    'art/art8.jpg',
+    'art/art9.jpg',
+    'art/art10.jpg',
+    'art/art11.jpg',
+    'art/art12.png',
+]);
+const TAMINGOFTHESHREW_GALLERY = imageUris([
+    'tamingoftheshrew/tamingoftheshrew1.jpg',
+    'tamingoftheshrew/tamingoftheshrew2.jpg',
+    'tamingoftheshrew/tamingoftheshrew3.jpg',
+    'tamingoftheshrew/tamingoftheshrew4.jpg',
+    'tamingoftheshrew/tamingoftheshrew5.jpg',
+    'tamingoftheshrew/tamingoftheshrew6.jpg',
+    'tamingoftheshrew/tamingoftheshrew7.jpg',
+    'tamingoftheshrew/tamingoftheshrew8.jpg',
+    'tamingoftheshrew/tamingoftheshrew9.jpg',
+    'tamingoftheshrew/tamingoftheshrew10.jpg',
+]);
+const URINETOWN_GALLERY = imageUris([
+    'urinetown/urinetown1.jpg',
+    'urinetown/urinetown2.jpg',
+    'urinetown/urinetown3.jpg',
+    'urinetown/urinetown4.jpg',
+    'urinetown/urinetown5.jpg',
+    'urinetown/urinetown6.jpg',
+    'urinetown/urinetown7.jpg',
+    'urinetown/urinetown8.jpg',
+    'urinetown/urinetown9.jpg',
+    'urinetown/urinetown10.jpg',
+    'urinetown/urinetown11.jpg',
+    'urinetown/urinetown12.jpg',
+    'urinetown/urinetown13.jpg',
+    'urinetown/urinetown14.jpg',
+    'urinetown/urinetown15.jpg',
+]);
+const MRBURNS_GALLERY = imageUris([
+    'mrburns/mrburns1.jpg',
+    'mrburns/mrburns2.jpg',
+    'mrburns/mrburns3.jpg',
+    'mrburns/mrburns4.jpg',
+    'mrburns/mrburns5.jpg',
+    'mrburns/mrburns6.jpg',
+    'mrburns/mrburns7.jpg',
+    'mrburns/mrburns8.jpg',
+    'mrburns/mrburns9.jpg',
+    'mrburns/mrburns10.jpg',
+    'mrburns/mrburns11.jpg',
+    'mrburns/mrburns12.jpg',
+    'mrburns/mrburns13.jpg',
+    'mrburns/mrburns14.jpg',
+    'mrburns/mrburns15.jpg',
+    'mrburns/mrburns16.jpg',
+    'mrburns/mrburns17.jpg',
+    'mrburns/mrburns18.jpg',
+]);
+const LARAMIE_GALLERY = imageUris([
+    'laramie/laramie1.jpg',
+    'laramie/laramie2.jpg',
+    'laramie/laramie3.jpg',
+    'laramie/laramie4.jpg',
+    'laramie/laramie5.jpg',
+    'laramie/laramie6.jpg',
+    'laramie/laramie7.jpg',
+    'laramie/laramie8.jpg',
+    'laramie/laramie9.jpg',
+    'laramie/laramie10.jpg',
+    'laramie/laramie11.jpg',
+    'laramie/laramie12.jpg',
+    'laramie/laramie13.jpg',
+    'laramie/laramie14.jpg',
+    'laramie/laramie15.jpg',
+    'laramie/laramie16.jpg',
+    'laramie/laramie17.jpg',
+    'laramie/laramie18.jpg',
+    'laramie/laramie19.jpg',
+]);
+const THE_DRAG_GALLERY = imageUris([
     'thedrag/thedrag1.jpg',
     'thedrag/thedrag2.jpg',
     'thedrag/thedrag3.jpg',
@@ -143,41 +229,55 @@ const BYU_GALLERY = imageUris([
     'byu/BYU9.jpg',
 ]);
 const RENAISSANCE_FAIRE_GALLERY = imageUris([
+    'renaissancefaire/renaissancefaire1.jpg',
+    'renaissancefaire/renaissancefaire2.jpg',
     'renaissancefaire/Shield1.png',
     'renaissancefaire/Shield2.png',
     'renaissancefaire/Shield3.png',
     'renaissancefaire/Shield4.png',
+    'renaissancefaire/renaissancefaire19_1.jpg',
+    'renaissancefaire/renaissancefaire19_2.jpg',
+    'renaissancefaire/renaissancefaire19_3.jpg',
 ]);
-exports.default = {
-    LOGO,
-    HOME,
-    JANU,
-    PLACEHOLDER,
-    RENAISSANCE_FAIRE,
-    BYU,
-    SUNDANCE,
-    RENAISSANCE_NOW,
-    UVU,
-    FAT_PIG,
-    TRIBES,
-    AGAMEMNON,
-    NEXT_FALL,
-    CABARET,
-    THE_DRAG,
-    TRIBES_GALLERY,
-    FAT_PIG_GALLERY,
-    UVU_GALLERY,
-    SUNDANCE_GALLERY,
-    RENAISSANCE_NOW_GALLERY,
-    BYU_GALLERY,
-    RENAISSANCE_FAIRE_GALLERY,
-    AGAMEMNON_GALLERY,
-    NEXT_FALL_GALLERY,
-    CABARET_GALLERY,
-    THE_DRAG_GRALLERY,
+module.exports = {
+    LOGO: LOGO,
+    HOME: HOME,
+    JANU: JANU,
+    PLACEHOLDER: PLACEHOLDER,
+    RENAISSANCE_FAIRE: RENAISSANCE_FAIRE,
+    BYU: BYU,
+    SUNDANCE: SUNDANCE,
+    RENAISSANCE_NOW: RENAISSANCE_NOW,
+    UVU: UVU,
+    FAT_PIG: FAT_PIG,
+    TRIBES: TRIBES,
+    AGAMEMNON: AGAMEMNON,
+    NEXT_FALL: NEXT_FALL,
+    CABARET: CABARET,
+    THE_DRAG: THE_DRAG,
+    LARAMIE: LARAMIE,
+    MRBURNS: MRBURNS,
+    TAMINGOFTHESHREW: TAMINGOFTHESHREW,
+    URINETOWN: URINETOWN,
+    TRIBES_GALLERY: TRIBES_GALLERY,
+    FAT_PIG_GALLERY: FAT_PIG_GALLERY,
+    UVU_GALLERY: UVU_GALLERY,
+    SUNDANCE_GALLERY: SUNDANCE_GALLERY,
+    RENAISSANCE_NOW_GALLERY: RENAISSANCE_NOW_GALLERY,
+    BYU_GALLERY: BYU_GALLERY,
+    RENAISSANCE_FAIRE_GALLERY: RENAISSANCE_FAIRE_GALLERY,
+    AGAMEMNON_GALLERY: AGAMEMNON_GALLERY,
+    NEXT_FALL_GALLERY: NEXT_FALL_GALLERY,
+    CABARET_GALLERY: CABARET_GALLERY,
+    THE_DRAG_GALLERY: THE_DRAG_GALLERY,
+    ART_GALLERY: ART_GALLERY,
+    LARAMIE_GALLERY: LARAMIE_GALLERY,
+    MRBURNS_GALLERY: MRBURNS_GALLERY,
+    URINETOWN_GALLERY: URINETOWN_GALLERY,
+    TAMINGOFTHESHREW_GALLERY: TAMINGOFTHESHREW_GALLERY
 };
 function imageUri(fileKey) {
-    return `${BASEPATH}${fileKey}`;
+    return "" + BASEPATH + fileKey;
 }
 function imageUris(fileKeys) {
     return fileKeys.map(imageUri);
