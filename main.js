@@ -1,5 +1,8 @@
-const imageUris = require('./image-uris');
 const request = require('request');
+
+const imageUris = require('./image-uris');
+
+const logger = require('./logger');
 
 // const INTERVAL:number = 6e4; // 1 minute
 const PREVIEW_WIDTH = 350;
