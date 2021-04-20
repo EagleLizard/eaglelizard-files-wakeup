@@ -82,8 +82,11 @@ function getRandomImageUri(){
 function getWebsite(){
   return new Promise((resolve, reject)=>{
     let uri;
-    uri = 'http://www.janicechan.design';
-    request(uri, (err, resp)=>{
+    uri = 'https://janicechan.design';
+    request({
+      uri,
+      strictSSL: false,
+    }, (err, resp)=>{
       if(err) return reject(err);
       resolve({
         uri,
@@ -105,6 +108,7 @@ function getImage(uri, width){
       json: true,
       uri,
       qs,
+      strictSSL: false,
     };
     request(options, (err, resp, body)=>{
       if(err) return reject(err);
